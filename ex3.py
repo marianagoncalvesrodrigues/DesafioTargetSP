@@ -15,12 +15,11 @@ with open('teste.xml', 'r') as f:
 Bs_data = BeautifulSoup(data, "xml") 
 b_unique = str(Bs_data.find_all('fevereiro'))
   
-print(b_unique) 
 newString = []
 dias = 0
 newString = b_unique.split("<, >, /", 29)
 
-if(newString == "fevereiro"):
+if(newString[0] == "fevereiro"):
   dias = 28
 else:
   dias = 30
@@ -28,8 +27,11 @@ soma = 0
 newList = []
 for item in newString:
   if(item > 1 and item < 29):
-    newList.add(int(newString[item]))
-    soma = int(newString[item]) + soma
+    if(newString[item] == 0):
+      dias = dias - 1
+    else:
+      newList.add(int(newString[item]))
+      soma = int(newString[item]) + soma
 
 media = soma/dias
 contador = 0
